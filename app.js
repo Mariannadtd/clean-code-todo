@@ -3,36 +3,58 @@ const addTaskButton = document.getElementsByTagName('button')[0];
 const todoList = document.getElementById('incompleteTasks');
 const completedList = document.getElementById('completed-tasks');
 
-const createNewTaskElement = function (taskText) {
-  const listItem = document.createElement('li');
-
+const createTaskCheckbox = function () {
   const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  return checkbox;
+};
+
+const createTaskLabel = function (taskText) {
   const label = document.createElement('label');
-  const editInput = document.createElement('input');
-  const editButton = document.createElement('button');
-  const deleteButton = document.createElement('button');
-  const deleteIcon = document.createElement('img');
 
   // Use innerText so task text is displayed literally instead of being parsed as HTML.
   label.innerText = taskText;
   label.className = 'task';
 
-  checkbox.type = 'checkbox';
+  return label;
+};
+
+const createTaskEditInput = function () {
+  const editInput = document.createElement('input');
   editInput.type = 'text';
   editInput.className = 'task';
+  return editInput;
+};
 
+const createTaskEditButton = function () {
+  const editButton = document.createElement('button');
   editButton.innerText = 'Edit';
   editButton.className = 'edit';
+  return editButton;
+};
+
+const createTaskDeleteButton = function () {
+  const deleteButton = document.createElement('button');
+  const deleteIcon = document.createElement('img');
 
   deleteButton.className = 'delete';
   deleteIcon.src = './remove.svg';
   deleteButton.appendChild(deleteIcon);
 
-  listItem.appendChild(checkbox);
-  listItem.appendChild(label);
-  listItem.appendChild(editInput);
-  listItem.appendChild(editButton);
-  listItem.appendChild(deleteButton);
+  return deleteButton;
+};
+
+const createNewTaskElement = function (taskText) {
+  const listItem = document.createElement('li');
+
+  listItem.append(
+    createTaskCheckbox(),
+    createTaskLabel(taskText),
+    createTaskEditInput(),
+    createTaskEditButton(),
+    createTaskDeleteButton(),
+  );
+
   return listItem;
 };
 
